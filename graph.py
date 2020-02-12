@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import networkx as nx
-import numpy as np
 
 
 def gera_lista(G, n):
@@ -13,10 +12,10 @@ def gera_matriz(G):
     return(m.toarray())
     
 ###################PARA TESTES HABILITAR ESSE TREECHO DE CODIGO #################################################################
-print("Escreva a lista dos nós separados por vírgula: ")
-nodes = input().split(",")
-print("Escreva a lista das arestas no formato ab separados por vírgula: ")
-edges = input().split(",")
+# print("Escreva a lista dos nós separados por vírgula: ")
+# nodes = input().split(",")
+# print("Escreva a lista das arestas no formato ab separados por vírgula: ")
+# edges = input().split(",")
 ##############################################################################################
 
 # lista de nós para testes: [a, b, c, d, e, f] -> entrada a,b,c,d,e,f
@@ -24,8 +23,8 @@ edges = input().split(",")
 # entrada ab,de,ce,bc,ef
 
 ########################PARA TESTES DESABILITAR ESSE TRECHO DE CODIGO##################
-# nodes='a', 'b', 'c', 'd', 'e', 'f'
-# edges='ab','de','ce','bc','ef'
+nodes='a', 'b', 'c', 'd', 'e', 'f'
+edges='ab','de','ce','bc','ef'
 #####################################################################################
 
 G = nx.Graph()
@@ -42,7 +41,3 @@ for i in G.nodes:
 nx.draw_networkx(G,with_labels=True, pos=nx.circular_layout(G), node_color='r', edge_color='b')
 
 plt.show()
-
-
-
-
