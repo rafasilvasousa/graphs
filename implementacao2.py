@@ -80,34 +80,41 @@ def imprimir_amplitude(G:nx.Graph):
 def busca_largura(G:nx.Graph):
     visitados=[]
     fila_aux=[]
-    lista_aux=[]
+    lista_aux=[] #essa lista vai armazenar os vertices por componente conexa
     saida=[]
+    index=0
     comp_conexos=0
     for i in G.nodes:
         if i not in visitados:
             visitados.append(i)
             lista_aux.append(i)
             fila_aux.append(i)
-        # if (len(fila_aux)>0):
-        #     fila_aux.remove(i)
-        #     if(len(fila_aux)==0):
-        #         comp_conexos+=1
-        #         if(len(lista_aux)>1):
-        #             saida.append(lista_aux.copy)
-        #             lista_aux.clear()
-        for j in G.neighbors(i):
+        
+        fila_aux.extend(G.neighbors(i))
+        for j in fila_aux:
             if j not in visitados:
-                visitados.append(j)
-                fila_aux.append(j)
+                visitados.append(j)    
                 lista_aux.append(j)
+                if len(fila_aux)>0:
+                    fila_aux.extend(G.neighbors(j))
+                
+
+        # for j in G.neighbors(i):
+        #     if j not in visitados:
+        #         visitados.append(j)
+        #         fila_aux.append(j)
+        #         lista_aux.append(j)
 
         if (len(fila_aux)>0):
             fila_aux.remove(i)
             if(len(fila_aux)==0):
                 comp_conexos+=1
                 if(len(lista_aux)>1):
-                    saida.append(lista_aux.copy)
+                    saida.append([])
+                    saida[index].extend(lista_aux.copy())
+                    index =+1
                     lista_aux.clear()
+            
             
     return (saida, comp_conexos)
 
