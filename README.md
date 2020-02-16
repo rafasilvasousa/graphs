@@ -16,4 +16,6 @@ Lista de arquivos:
         Após a inserção dos vertices, será impresso a matriz de adjacencia e em seguida a lista de adjacencias de cada nó. O código finaliza com a exibição de um gráfico simples.
 
         **Importante**: Esse código foi testado usando caracteres como entradas para vertices e conjuntos de arestas. Não há evidências de que funcione com outro tipo de dados.
-    + 
+    
+    + implementacao2.py - Arquivo da atividade de implementação 2
+        Algoritmo implementado comforme as orientações da atividade com exceção de que os vértices devem conter obrigatoriamente caracteres.
