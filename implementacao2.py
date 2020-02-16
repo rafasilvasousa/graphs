@@ -66,58 +66,48 @@ def imprimir_amplitude(G:nx.Graph):
         for i in caminho:
             print(str(i)+" ", end='')
         print()
-
-    # else:
-        # for i in range(componentes):
-        #     print('Caminho do comp '+str(i+1)+': ', end='')
-        #     for j in caminho[i]:
-        #         print(str(j)+" ", end='')
-        #     print()
+    else:
+        for i in range(componentes):
+            print('Caminho do comp '+str(i+1)+': ', end='')
+            for j in caminho[i]:
+                print(str(j)+" ", end='')
+            print()
 
 #####################################################################
 
 ###################### FUNÇÃO DE BUSCA POR AMPLITUDE ################
 def busca_largura(G:nx.Graph):
+    fila=[]
+    li_comp=[]
     visitados=[]
-    fila_aux=[]
-    lista_aux=[] #essa lista vai armazenar os vertices por componente conexa
+    comp_cone=0
     saida=[]
     index=0
-    comp_conexos=0
-    for i in G.nodes:
+
+    def check_largura(G:nx.Graph):
+        for i in fila:
+            fila.remove(i)
+            for j in G.neighbors(i):
+                if j not in visitados:
+                    visitados.append(j)
+                    fila.append(j)
+                    li_comp.append(j)
+            check_largura(G)
+
+    
+    for i in G.nodes():
         if i not in visitados:
             visitados.append(i)
-            lista_aux.append(i)
-            fila_aux.append(i)
-        
-        fila_aux.extend(G.neighbors(i))
-        for j in fila_aux:
-            if j not in visitados:
-                visitados.append(j)    
-                lista_aux.append(j)
-                if len(fila_aux)>0:
-                    fila_aux.extend(G.neighbors(j))
-                
-
-        # for j in G.neighbors(i):
-        #     if j not in visitados:
-        #         visitados.append(j)
-        #         fila_aux.append(j)
-        #         lista_aux.append(j)
-
-        if (len(fila_aux)>0):
-            fila_aux.remove(i)
-            if(len(fila_aux)==0):
-                comp_conexos+=1
-                if(len(lista_aux)>1):
-                    saida.append([])
-                    saida[index].extend(lista_aux.copy())
-                    index =+1
-                    lista_aux.clear()
-            
-            
-    return (saida, comp_conexos)
-
+            fila.append(i)
+            li_comp.append(i)
+            check_largura(G)
+            comp_cone= comp_cone+1
+            saida.append([])
+            saida[index].extend(li_comp.copy())
+            index=index+1
+            li_comp.clear()
+    
+    return(saida, comp_cone)
 
 
 #####################################################################
@@ -141,7 +131,9 @@ grafo = nx.Graph()
 grafo.add_nodes_from(vertices)
 grafo.add_edges_from(lista_arestas)
 
-# imprimir_profundidade(grafo)
+imprimir_profundidade(grafo)
+print()
+print()
 imprimir_amplitude(grafo)
 
 
