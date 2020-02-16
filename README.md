@@ -23,4 +23,4 @@ Lista de arquivos:
     
     + implementacao2.py - Arquivo da atividade de implementação 2
         **Importante**: Esse código foi testado usando caracteres como entradas para vertices e conjuntos de arestas. 
-        Não há evidências de que funcione com outro tipo de dados.
+        O algoritmo NÃO FUNCIONARÁ PARA NUMERAIS COMO VERTICES
