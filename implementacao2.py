@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import networkx as nx
-
 ################# FUNÇÃO PARA IMPRIMIR ####################
 def imprimir(temp):
     caminho=temp[0]
@@ -10,7 +9,6 @@ def imprimir(temp):
         for j in caminho[i]:
             print(str(j)+" ", end='')
         print('\n---------------------')
-
 ###################### FUNÇÃO DE BUSCA POR PROFUNDIDADE #############
 def busca_profundidade(G: nx.Graph):
     visitados=[]
@@ -23,7 +21,6 @@ def busca_profundidade(G: nx.Graph):
                 visitados.append(i)
                 vetor_aux.append(i)
                 prof(i)
-
     for i in G.nodes:
         if i not in visitados:
             if (len(vetor_aux)>0):
@@ -35,9 +32,7 @@ def busca_profundidade(G: nx.Graph):
             prof(i)
     saida.append(vetor_aux.copy())
     return (saida, comp_conexas)
-
 #####################################################################
-
 
 ###################### FUNÇÃO DE BUSCA POR AMPLITUDE ################
 def busca_largura(G:nx.Graph):
@@ -47,7 +42,6 @@ def busca_largura(G:nx.Graph):
     comp_cone=0
     saida=[]
     index=0
-
     def check_largura(G:nx.Graph):
         for i in fila:
             fila.remove(i)
@@ -58,7 +52,6 @@ def busca_largura(G:nx.Graph):
                     li_comp.append(j)
             check_largura(G)
 
-    
     for i in G.nodes():
         if i not in visitados:
             visitados.append(i)
@@ -72,26 +65,17 @@ def busca_largura(G:nx.Graph):
             li_comp.clear()
     
     return(saida, comp_cone)
-
-
 #####################################################################
-
 
 ######################## FUNÇÃO PRINCIPAL ###########################
 arquivo = open('grafo2', 'r')
 nvertices =int(arquivo.readline())
-
 vertices = tuple(arquivo.readline().split())
-
 narestas = int(arquivo.readline())
-
 lista_arestas = []
-
 for i in range(narestas):
     lista_arestas.append(arquivo.readline().strip().replace(' ', ''))
-
 grafo = nx.Graph()
-
 
 grafo.add_nodes_from(vertices)
 grafo.add_edges_from(lista_arestas)
@@ -106,7 +90,6 @@ print()
 print("--> Algoritmo BFS")
 largura=(busca_largura(grafo))
 imprimir(largura)
-
 
 nx.draw_networkx(grafo,with_labels=True, 
     pos=nx.planar_layout(grafo), 
